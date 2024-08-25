@@ -1,0 +1,46 @@
+body {
+  background-color: #d0cdd7;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  width: 80px;
+  height: 120px;
+  background-color: #4f517d;
+  color: #000;
+  font-size: 30px;
+  padding: 20px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  border: none;
+  /* transition: background-color 0.1s ease; */
+  transition: transform 0.1s ease;
+}
+
+button[revealed='true'] {
+  background-color: #7a7ca2;
+  cursor: default;
+}
+
+button[revealed='false']:hover {
+  background-color: #7a7ca2;
+  transform: scale(1.05);
+}
+
+/* button[found='true'] {
+  display: none;
+} */

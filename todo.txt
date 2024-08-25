@@ -1,0 +1,8 @@
+add time counter
+add scoreboard
+refactor code to make it cleaner
+fix current way of checking the win
+add menu with 3 difficulties
+add 2 player mode
+
+add dementia mode
