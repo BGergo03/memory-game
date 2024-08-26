@@ -2,12 +2,53 @@ body {
   background-color: #d0cdd7;
 }
 
+.menu {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+}
+
+.menu-button {
+  width: 200px;
+  height: 100px;
+  background-color: #4f517d;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  padding: 20px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.1s ease;
+  transition: transform 0.1s ease;
+}
+
+.menu-button:hover {
+  background-color: #7a7ca2;
+  transform: scale(1.05);
+}
+
+.title {
+  font-size: 80px;
+  color: #fff;
+  background-color: #4f517d;
+  padding: 20px 20px;
+  border-radius: 10px;
+  margin: 10px;
+  justify-content: center;
+  text-align: center;
+}
+
 .table {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
 }
 
 .row {
@@ -16,7 +57,7 @@ body {
   align-items: center;
 }
 
-button {
+.card {
   width: 80px;
   height: 120px;
   background-color: #4f517d;
@@ -31,12 +72,12 @@ button {
   transition: transform 0.1s ease;
 }
 
-button[revealed='true'] {
+.card[revealed='true'] {
   background-color: #7a7ca2;
   cursor: default;
 }
 
-button[revealed='false']:hover {
+.card[revealed='false']:hover {
   background-color: #7a7ca2;
   transform: scale(1.05);
 }

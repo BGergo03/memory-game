@@ -26,6 +26,7 @@ export class Game {
   #revealedCards: number;
   #currentRevealedCard: HTMLElement | null;
   #gameOver: boolean;
+  #cardsRevealed: boolean;
 
   constructor(rowLength: number, columnLength: number) {
     if ((rowLength * columnLength) % 2 !== 0) {
@@ -37,6 +38,7 @@ export class Game {
     this.#revealedCards = 0;
     this.#currentRevealedCard = null;
     this.#gameOver = false;
+    this.#cardsRevealed = false;
     this.#initializeTable();
   }
 
@@ -90,7 +92,11 @@ export class Game {
       `${row}-${column}`
     );
 
-    if (!cardToReveal || cardToReveal.getAttribute('revealed') === 'true')
+    if (
+      !cardToReveal ||
+      cardToReveal.getAttribute('revealed') === 'true' ||
+      this.#cardsRevealed
+    )
       return;
 
     cardToReveal.setAttribute('revealed', 'true');
@@ -101,19 +107,22 @@ export class Game {
     } else {
       const firstCard = this.#currentRevealedCard;
       this.#currentRevealedCard = null;
+      this.#cardsRevealed = true;
       if (this.#doCardsMatch(firstCard, cardToReveal)) {
-        setTimeout(() => {
-          firstCard.setAttribute('found', 'true');
-          cardToReveal.setAttribute('found', 'true');
-          this.#revealedCards += 2;
-          !this.#gameOver && this.#checkWin() && alert('You won!');
-        }, 1000);
+        this.#cardsRevealed = false;
+        this.#revealedCards += 2;
+        !this.#gameOver &&
+          this.#checkWin() &&
+          setTimeout(() => {
+            alert('You won!'), 1000;
+          });
       } else {
         setTimeout(() => {
           firstCard.innerText = '';
           firstCard.setAttribute('revealed', 'false');
           cardToReveal.innerText = '';
           cardToReveal.setAttribute('revealed', 'false');
+          this.#cardsRevealed = false;
         }, 1000);
       }
     }
