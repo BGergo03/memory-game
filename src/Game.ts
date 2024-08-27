@@ -43,37 +43,61 @@ export class Game {
   }
 
   #initializeTable(): void {
-    let potentialcardsArray: string[] = [];
-    for (let i = 0; i < (this.#rowLength * this.#columnLength) / 2; i++) {
-      potentialcardsArray.push(potentialCards[i]);
-      potentialcardsArray.push(potentialCards[i]);
-    }
+    const potentialCardsArray: string[] = this.#choosePotentialCards();
 
     const table: HTMLElement = document.createElement('div');
     table.className = 'table';
 
-    for (let i = 0; i < this.#rowLength; i++) {
-      this.#cards[i] = [];
-      const row: HTMLElement = document.createElement('div');
+    this.#createRows(potentialCardsArray, table);
+
+    document.body.appendChild(table);
+  }
+
+  #createRows(potentialCardsArray: string[], table: HTMLElement): void {
+    for (let rowIndex = 0; rowIndex < this.#columnLength; rowIndex++) {
+      this.#cards[rowIndex] = [];
+
+      const row = document.createElement('div');
       row.className = 'row';
-      for (let j = 0; j < this.#columnLength; j++) {
-        const randomIndex = Math.floor(
-          Math.random() * potentialcardsArray.length
-        );
-        this.#cards[i][j] = potentialcardsArray[randomIndex];
-        potentialcardsArray.splice(randomIndex, 1);
-        const card: HTMLElement = document.createElement('button');
-        card.className = 'card';
-        card.id = `${i}-${j}`;
-        card.setAttribute('revealed', 'false');
-        card.onclick = () => {
-          this.revealCard(i, j);
-        };
-        row.appendChild(card);
-      }
+
+      this.#createCardsForRow(potentialCardsArray, rowIndex, row);
       table.appendChild(row);
     }
-    document.body.appendChild(table);
+  }
+
+  #createCardsForRow(
+    potentialCardsArray: string[],
+    rowIndex: number,
+    row: HTMLElement
+  ): void {
+    for (let columnIndex = 0; columnIndex < this.#rowLength; columnIndex++) {
+      const randomCard = this.#chooseRandomCard(potentialCardsArray);
+      this.#cards[rowIndex][columnIndex] = randomCard;
+      const card = document.createElement('button');
+      card.className = 'card';
+      card.id = `${rowIndex}-${columnIndex}`;
+      card.setAttribute('revealed', 'false');
+      card.onclick = () => {
+        this.#revealCard(rowIndex, columnIndex);
+      };
+      row.appendChild(card);
+    }
+  }
+
+  #chooseRandomCard(potentialCardsArray: string[]): string {
+    const index = Math.floor(Math.random() * potentialCardsArray.length);
+    const randomCard = potentialCardsArray[index];
+    potentialCardsArray.splice(index, 1);
+    return randomCard;
+  }
+
+  #choosePotentialCards(): string[] {
+    const potentialcardsArray: string[] = [];
+    for (let i = 0; i < (this.#rowLength * this.#columnLength) / 2; i++) {
+      potentialcardsArray.push(potentialCards[i]);
+      potentialcardsArray.push(potentialCards[i]);
+    }
+    return potentialcardsArray;
   }
 
   #checkWin(): boolean {
@@ -87,7 +111,7 @@ export class Game {
     return card1 !== card2 && card1.innerText === card2.innerText;
   }
 
-  public revealCard(row: number, column: number): void {
+  #revealCard(row: number, column: number): void {
     const cardToReveal: HTMLElement | null = document.getElementById(
       `${row}-${column}`
     );

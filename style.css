@@ -11,7 +11,7 @@ body {
 }
 
 .menu-button {
-  width: 200px;
+  width: 400px;
   height: 100px;
   background-color: #4f517d;
   color: #fff;
@@ -25,6 +25,26 @@ body {
   margin: 10px;
   transition: background-color 0.1s ease;
   transition: transform 0.1s ease;
+}
+
+.back-button {
+  width: 100px;
+  height: 60px;
+  background-color: #4f517d;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  padding: 20px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.1s ease;
+  transition: transform 0.1s ease;
+}
+.back-button:hover {
+  background-color: #7a7ca2;
+  transform: scale(1.05);
 }
 
 .menu-button:hover {
@@ -68,7 +88,6 @@ body {
   cursor: pointer;
   margin: 10px;
   border: none;
-  /* transition: background-color 0.1s ease; */
   transition: transform 0.1s ease;
 }
 
@@ -81,7 +100,3 @@ body {
   background-color: #7a7ca2;
   transform: scale(1.05);
 }
-
-/* button[found='true'] {
-  display: none;
-} */
