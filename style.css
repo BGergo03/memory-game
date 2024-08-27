@@ -2,6 +2,29 @@ body {
   background-color: #d0cdd7;
 }
 
+.game-header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 10vh;
+}
+
+.score {
+  width: 100px;
+  height: 60px;
+  background-color: #4f517d;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+}
+
 .menu {
   display: flex;
   justify-content: center;
@@ -21,7 +44,6 @@ body {
   font-size: 30px;
   padding: 20px 20px;
   border-radius: 10px;
-  cursor: pointer;
   margin: 10px;
   transition: background-color 0.1s ease;
   transition: transform 0.1s ease;
@@ -37,7 +59,6 @@ body {
   cursor: pointer;
   padding: 20px 20px;
   border-radius: 10px;
-  cursor: pointer;
   margin: 10px;
   transition: background-color 0.1s ease;
   transition: transform 0.1s ease;

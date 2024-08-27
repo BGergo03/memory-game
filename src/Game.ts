@@ -73,15 +73,20 @@ export class Game {
     for (let columnIndex = 0; columnIndex < this.#rowLength; columnIndex++) {
       const randomCard = this.#chooseRandomCard(potentialCardsArray);
       this.#cards[rowIndex][columnIndex] = randomCard;
-      const card = document.createElement('button');
-      card.className = 'card';
-      card.id = `${rowIndex}-${columnIndex}`;
-      card.setAttribute('revealed', 'false');
-      card.onclick = () => {
-        this.#revealCard(rowIndex, columnIndex);
-      };
+      const card = this.#createCard(rowIndex, columnIndex);
       row.appendChild(card);
     }
+  }
+
+  #createCard(rowIndex: number, columnIndex: number): HTMLElement {
+    const card = document.createElement('button');
+    card.className = 'card';
+    card.id = `${rowIndex}-${columnIndex}`;
+    card.setAttribute('revealed', 'false');
+    card.onclick = () => {
+      this.#revealCard(rowIndex, columnIndex);
+    };
+    return card;
   }
 
   #chooseRandomCard(potentialCardsArray: string[]): string {
