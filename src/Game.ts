@@ -1,3 +1,5 @@
+import { stop } from './Stopwatch';
+
 const potentialCards: string[] = [
   '🦫',
   '🐶',
@@ -143,8 +145,9 @@ export class Game {
         !this.#gameOver &&
           this.#checkWin() &&
           setTimeout(() => {
-            alert('You won!'), 1000;
-          });
+            alert('You won!');
+            stop();
+          }, 200);
       } else {
         setTimeout(() => {
           firstCard.innerText = '';
