@@ -1,45 +1,54 @@
-let minute = 0;
-let second = 0;
-let stopped: boolean = false;
+export class Stopwatch {
+  #minute: number;
+  #second: number;
+  #stopped: boolean;
 
-export function stop() {
-  stopped = true;
-}
-
-export function start() {
-  minute = 0;
-  second = 0;
-  stopped = false;
-  stopWatch();
-}
-
-function stopWatch() {
-  if (stopped) {
-    return;
-  }
-  second += 0.5;
-
-  if (second == 60) {
-    minute++;
-    second = 0;
+  constructor() {
+    this.#minute = 0;
+    this.#second = 0;
+    this.#stopped = false;
   }
 
-  if (minute == 60) {
-    minute = 0;
-    second = 0;
+  public start() {
+    this.#minute = 0;
+    this.#second = 0;
+    this.#stopped = false;
+    this.stopWatch();
   }
 
-  let minString: string = minute.toString();
-  let secString: string = Math.floor(second).toString();
-
-  if (minute < 10) {
-    minString = '0' + minString;
+  public stop() {
+    this.#stopped = true;
   }
 
-  if (second < 10) {
-    secString = '0' + secString;
-  }
+  private stopWatch() {
+    if (this.#stopped) {
+      return;
+    }
+    this.#second += 0.5;
 
-  document.querySelector('.score')!.innerHTML = minString + ':' + secString;
-  setTimeout(stopWatch, 500);
+    if (this.#second == 60) {
+      this.#minute++;
+      this.#second = 0;
+    }
+
+    if (this.#minute == 60) {
+      this.#minute = 0;
+      this.#second = 0;
+    }
+
+    let minString: string = this.#minute.toString();
+    let secString: string = Math.floor(this.#second).toString();
+
+    if (this.#minute < 10) {
+      minString = '0' + minString;
+    }
+
+    if (this.#second < 10) {
+      secString = '0' + secString;
+    }
+
+    document.querySelector('.score')!.innerHTML = minString + ':' + secString;
+
+    setTimeout(() => this.stopWatch(), 500);
+  }
 }
