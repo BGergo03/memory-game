@@ -1,3 +1,5 @@
+import { Stopwatch } from './Stopwatch';
+
 const potentialCards: string[] = [
   '🦫',
   '🐶',
@@ -27,8 +29,9 @@ export class Game {
   #currentRevealedCard: HTMLElement | null;
   #gameOver: boolean;
   #cardsRevealed: boolean;
+  #stopwatch: Stopwatch;
 
-  constructor(rowLength: number, columnLength: number) {
+  constructor(rowLength: number, columnLength: number, stopwatch: Stopwatch) {
     if ((rowLength * columnLength) % 2 !== 0) {
       throw new Error('The number of cards must be even');
     }
@@ -39,7 +42,9 @@ export class Game {
     this.#currentRevealedCard = null;
     this.#gameOver = false;
     this.#cardsRevealed = false;
+    this.#stopwatch = stopwatch;
     this.#initializeTable();
+    this.#stopwatch.start();
   }
 
   #initializeTable(): void {
@@ -143,8 +148,9 @@ export class Game {
         !this.#gameOver &&
           this.#checkWin() &&
           setTimeout(() => {
-            alert('You won!'), 1000;
-          });
+            this.#stopwatch.stop();
+            alert('You won!');
+          }, 200);
       } else {
         setTimeout(() => {
           firstCard.innerText = '';
