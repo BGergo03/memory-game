@@ -149,7 +149,7 @@ export class Game {
           this.#checkWin() &&
           setTimeout(() => {
             this.#stopwatch.stop();
-            alert('Nyomod Dorka <33');
+            alert('You won');
           }, 200);
       } else {
         setTimeout(() => {
